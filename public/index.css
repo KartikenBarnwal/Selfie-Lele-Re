@@ -1,0 +1,15 @@
+body{
+    text-transform: capitalize;
+}
+.location{
+    background-color: rgba(255, 255, 255,0.5);
+    color: rgb(50, 4, 58);
+    font-family: cursive;
+    margin:15% 0;
+    text-align: center;
+    padding: 0.5%;
+}
+.location #mapid{
+    height: 180px;
+    border: solid 2px rgb(214, 30, 30);
+}
