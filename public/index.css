@@ -11,5 +11,13 @@ body{
 }
 .location #mapid{
     height: 180px;
-    border: solid 2px rgb(214, 30, 30);
+    border: solid 2px rgb(129, 124, 124);
+}
+.location #button{
+    background-color: rgb(50, 4, 58);
+    color: rgba(255, 255, 255,0.5);
+    padding: 2%;
+}
+.location #ans{
+    transition: 0.6s ease;
 }
