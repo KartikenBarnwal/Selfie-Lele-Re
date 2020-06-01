@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="photos/icon.webp">
+    <title>Selfie LeLe Re</title>
+    <link rel="stylesheet" href="selfies.css">
+</head>
+<body>
+    {{>header}}
+
+    <script>
+        getData()
+        async function getData(){
+            const response = await fetch('/api')
+            const data = await response.json()
+            for(post of data)
+            {
+
+                const root = document.createElement('div')
+                const mood = document.createElement('div')
+                const uname = document.createElement('div')
+                const geo = document.createElement('div')
+                const time = document.createElement('div')
+                
+                mood.textContent =post.mood
+                uname.textContent = "UserName: "+post.uname
+                geo.textContent = "Lat: "+post.lat.toFixed(2)+"°"+" & Lon: "+post.lon.toFixed(2)+"°"
+                time.textContent = post.timesStamp.time+", "+post.timesStamp.date
+
+                root.append(uname,mood,geo,time)
+                const br = document.createElement('br')
+                root.appendChild(br)
+                document.body.append(root)
+
+                const styles={
+                    backgroundColor:"rgba(255,255,255,0.5)",
+                    color:"black",
+                    margin: '10% 2%'
+                }
+                Object.assign(root.style, styles)
+
+                const styles2={
+                    color:"rgba(255,255,255,0.8)",
+                    backgroundColor:"black",
+                    padding:"2%"
+                }
+                const styles3={
+                    margin:'2% 0 0 2%'
+                }
+                Object.assign(uname.style, styles2)
+                Object.assign(mood.style,styles3)
+                Object.assign(geo.style,styles3)
+                Object.assign(time.style,styles3)
+
+                
+                
+
+
+                {{!-- const uname = document.createElement('h3')
+                const mood = document.createElement('h3')
+                
+                const txt1 = document.createTextNode(JSON.stringify(post.uname))
+                const txt2 = document.createTextNode(JSON.stringify(post.mood))
+
+                uname.appendChild(txt1)
+                mood.appendChild(txt2)
+
+                div.appendChild(uname)
+                div.appendChild(mood)
+
+                document.getElementById('posts').appendChild(div) --}}
+
+                {{!-- document.getElementById('posts').innerHTML=JSON.stringify(post) --}}
+
+            }
+            {{!-- console.log(data) --}}
+        }
+    </script>
+</body>
+</html>

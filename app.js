@@ -1,4 +1,5 @@
 const express = require('express')
+const DataStore = require('nedb')
 const hbs = require('hbs')
 const path = require('path')
 const fs = require('fs')
@@ -19,17 +20,15 @@ app.get('',(req,res)=>{
     })
 })
 
+const database = new DataStore({filename: 'database.db',autoload: true})
+
 //data being sent to server side from the webpage
 app.post('/api',(req,res)=>{
-    console.log(req.body)
-    const {lat,lon} = req.body
-    // res.json({
-    //     latitude:lat,
-    //     longitude:lon
-    // })
-    const data = JSON.stringify(req.body)
-    
-    fs.appendFileSync('data.txt',data+"\n")
+    const data = req.body
+    data.timesStamp = {time: (new Date()).toLocaleTimeString(),
+                        date: (new Date()).toDateString()}
+    database.insert(data)
+    // res.json(data)
 })
 
 app.get('/about',(req,res)=>{
@@ -39,8 +38,24 @@ app.get('/about',(req,res)=>{
     })
 })
 
-app.get('/selfie',(req,res)=>{
-    res.send("Selfie Page")
+app.get('/selfies',(req,res)=>{
+    res.render(('selfies'))
+})
+
+app.get('/api',(req,res)=>{
+    database.find({},(err,data)=>{
+        if(err)
+        {
+            res.end()
+            return
+        }
+        else
+        {
+            res.json(data)
+        }
+
+    })
+    
 })
 
 const port = process.env.PORT || 3000

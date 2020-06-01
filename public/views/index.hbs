@@ -16,13 +16,22 @@
 <body>
     {{>header}}
     
+    <div class="selfie">
+        <img src="../photos/selfie1.jpg" alt="" width="100%">
+        <h1>Share Your Selfie!</h1>
+        UserName* -
+        <input type="text" placeholder="..." id="uname" ><br><br><br>
+        Your Mood* -
+        <input type="text" placeholder="..." required id="mood" ><br><br><br>
+        <button id="button">Submit</button>
+    </div>
+
     <div class="location">
-        <h3>know your geo location?</h3>
-        <h3 id="button">Click Here!</h3>
+        <h3 id="check">get your location here</h3>
         <p style="opacity: 0;" id="ans">Latitude: <span id="lat"></span><br>longitude: <span id="lon"></span></p>
         <div id="mapid" id="ans"></div>
     </div>
-    
+
    <script>
     
     document.getElementById('button').addEventListener('click',geolocate)
@@ -36,8 +45,9 @@
             document.getElementById('lon').innerHTML=position.coords.longitude.toFixed(2)+"&deg"
             const lat = position.coords.latitude
             const lon = position.coords.longitude
-
-            const data = {lat,lon}
+            const uname = document.getElementById('uname').value
+            const mood = document.getElementById('mood').value
+            const data = {lat,lon,uname,mood}
             const options={
                 method:'POST',
                 headers:{
@@ -85,6 +95,8 @@
         console.log('geolocation not available!')
     }
 }
+
    </script> 
+   <script src="index.js"></script>
 </body>
 </html>
