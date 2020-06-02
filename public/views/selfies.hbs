@@ -23,13 +23,15 @@
                 const uname = document.createElement('div')
                 const geo = document.createElement('div')
                 const time = document.createElement('div')
+                const image = document.createElement('img')
                 
                 mood.textContent =post.mood
-                uname.textContent = "UserName: "+post.uname
+                uname.textContent = post.uname
                 geo.textContent = "Lat: "+post.lat.toFixed(2)+"°"+" & Lon: "+post.lon.toFixed(2)+"°"
                 time.textContent = post.timesStamp.time+", "+post.timesStamp.date
+                image.src = post.image64
 
-                root.append(uname,mood,geo,time)
+                root.append(uname,mood,geo,time,image)
                 const br = document.createElement('br')
                 root.appendChild(br)
                 document.body.append(root)
@@ -49,10 +51,17 @@
                 const styles3={
                     margin:'2% 0 0 2%'
                 }
+                const styles4={
+                    margin:'5% 0 0 2%',
+                    width:'80%',
+                    borderRadius:'10%',
+                    border:'solid 1px black'
+                }
                 Object.assign(uname.style, styles2)
                 Object.assign(mood.style,styles3)
                 Object.assign(geo.style,styles3)
                 Object.assign(time.style,styles3)
+                Object.assign(image.style,styles4)
 
                 
                 
